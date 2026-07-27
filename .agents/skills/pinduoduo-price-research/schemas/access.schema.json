@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan",
+    "access"
+  ],
+  "properties": {
+    "plan": {
+      "type": "object"
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_backend",
+        "marketplace",
+        "search_transition_verified",
+        "visible_state",
+        "login_state",
+        "checked_at"
+      ],
+      "properties": {
+        "source_backend": {
+          "enum": [
+            "aialra-shopping-browser"
+          ]
+        },
+        "marketplace": {
+          "enum": [
+            "pinduoduo.com"
+          ]
+        },
+        "search_transition_verified": {
+          "const": true
+        },
+        "visible_state": {
+          "enum": [
+            "results-visible",
+            "no-results-visible"
+          ]
+        },
+        "login_state": {
+          "enum": [
+            "anonymous",
+            "signed-in"
+          ]
+        },
+        "checked_at": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 64
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_text",
+    "product",
+    "purchase_context",
+    "constraints",
+    "collection",
+    "assumptions"
+  ],
+  "properties": {
+    "request_text": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 2000
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_query",
+        "category",
+        "condition",
+        "required_terms",
+        "excluded_terms"
+      ],
+      "properties": {
+        "canonical_query": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "condition": {
+          "enum": [
+            "new",
+            "open-box",
+            "refurbished",
+            "used",
+            "any"
+          ]
+        },
+        "required_terms": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "excluded_terms": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        }
+      }
+    },
+    "purchase_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "marketplace",
+        "destination_country",
+        "destination_region",
+        "comparison_currency"
+      ],
+      "properties": {
+        "marketplace": {
+          "enum": [
+            "pinduoduo.com"
+          ]
+        },
+        "destination_country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "destination_region": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "comparison_currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_budget",
+        "allowed_buying_formats",
+        "allow_unknown_shipping",
+        "require_returns"
+      ],
+      "properties": {
+        "maximum_budget": {
+          "type": "string",
+          "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+        },
+        "allowed_buying_formats": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "fixed-price",
+              "group-buy",
+              "member-price",
+              "subscription",
+              "unknown"
+            ]
+          }
+        },
+        "allow_unknown_shipping": {
+          "type": "boolean"
+        },
+        "require_returns": {
+          "type": "boolean"
+        }
+      }
+    },
+    "collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "query_variants",
+        "sort_modes",
+        "minimum_rounds",
+        "maximum_rounds",
+        "pages_per_round",
+        "candidate_limit",
+        "detail_limit",
+        "saturation",
+        "pacing"
+      ],
+      "properties": {
+        "query_variants": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          }
+        },
+        "sort_modes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "enum": [
+              "relevance",
+              "price-ascending",
+              "newest"
+            ]
+          }
+        },
+        "minimum_rounds": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 5
+        },
+        "maximum_rounds": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 5
+        },
+        "pages_per_round": {
+          "const": 1
+        },
+        "candidate_limit": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 100
+        },
+        "detail_limit": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 8
+        },
+        "saturation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min_new_unique_per_round",
+            "consecutive_rounds"
+          ],
+          "properties": {
+            "min_new_unique_per_round": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "consecutive_rounds": {
+              "const": 2
+            }
+          }
+        },
+        "pacing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maximum_parallel_pages",
+            "minimum_action_interval_seconds",
+            "risk_event_retries",
+            "reuse_observation_cache_seconds"
+          ],
+          "properties": {
+            "maximum_parallel_pages": {
+              "const": 1
+            },
+            "minimum_action_interval_seconds": {
+              "type": "number",
+              "minimum": 3,
+              "maximum": 10
+            },
+            "risk_event_retries": {
+              "const": 0
+            },
+            "reuse_observation_cache_seconds": {
+              "type": "integer",
+              "minimum": 900,
+              "maximum": 3600
+            }
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  }
+}

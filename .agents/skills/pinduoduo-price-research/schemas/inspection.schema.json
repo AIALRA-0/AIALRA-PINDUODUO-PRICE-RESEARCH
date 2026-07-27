@@ -1,0 +1,410 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan",
+    "access",
+    "round_coverage",
+    "inspection_coverage",
+    "offers"
+  ],
+  "properties": {
+    "plan": {
+      "type": "object"
+    },
+    "access": {
+      "type": "object"
+    },
+    "round_coverage": {
+      "type": "object"
+    },
+    "inspection_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "details_attempted",
+        "details_verified",
+        "reviews_inspected",
+        "failed_urls"
+      ],
+      "properties": {
+        "details_attempted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "details_verified": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "reviews_inspected": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "failed_urls": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      }
+    },
+    "offers": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "offer_id",
+          "platform_item_id",
+          "title",
+          "url",
+          "image_urls",
+          "search_backends",
+          "detail_backend",
+          "listing_type",
+          "listing_state",
+          "buying_formats",
+          "match_confidence",
+          "match_reasons",
+          "condition",
+          "selected_variant",
+          "availability",
+          "price",
+          "shipping",
+          "import_charges",
+          "tax",
+          "discount",
+          "discount_verified",
+          "currency",
+          "price_scope",
+          "seller",
+          "policy",
+          "reviews",
+          "signals",
+          "evidence_level",
+          "retrieved_at",
+          "seen_in_rounds",
+          "rank_history"
+        ],
+        "properties": {
+          "offer_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "platform_item_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{5,40}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 500
+          },
+          "url": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 2000
+          },
+          "image_urls": {
+            "type": "array",
+            "maxItems": 6,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "search_backends": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "enum": [
+                "aialra-shopping-browser"
+              ]
+            }
+          },
+          "detail_backend": {
+            "enum": [
+              "aialra-shopping-browser"
+            ]
+          },
+          "listing_type": {
+            "enum": [
+              "product",
+              "accessory",
+              "empty-box",
+              "parts",
+              "service",
+              "preorder",
+              "uncertain"
+            ]
+          },
+          "listing_state": {
+            "enum": [
+              "active",
+              "ended",
+              "sold",
+              "unavailable",
+              "unknown"
+            ]
+          },
+          "buying_formats": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "enum": [
+                "fixed-price",
+                "group-buy",
+                "member-price",
+                "subscription",
+                "unknown"
+              ]
+            }
+          },
+          "match_confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "match_reasons": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "items": {
+              "type": "string",
+              "maxLength": 240
+            }
+          },
+          "condition": {
+            "enum": [
+              "new",
+              "open-box",
+              "certified-refurbished",
+              "seller-refurbished",
+              "used",
+              "parts-only",
+              "unknown"
+            ]
+          },
+          "selected_variant": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "availability": {
+            "enum": [
+              "in-stock",
+              "limited",
+              "out-of-stock",
+              "unknown"
+            ]
+          },
+          "price": {
+            "type": "string",
+            "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+          },
+          "shipping": {
+            "type": "string",
+            "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+          },
+          "import_charges": {
+            "type": "string",
+            "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+          },
+          "tax": {
+            "type": "string",
+            "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+          },
+          "discount": {
+            "type": "string",
+            "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+          },
+          "discount_verified": {
+            "type": "boolean"
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^(unknown|[A-Z]{3})$"
+          },
+          "price_scope": {
+            "enum": [
+              "public",
+              "coupon",
+              "account-personalized",
+              "group-buy",
+              "member",
+              "subscription",
+              "unknown"
+            ]
+          },
+          "seller": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "feedback_percent",
+              "feedback_count",
+              "top_rated"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "feedback_percent": {
+                "type": "string",
+                "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+              },
+              "feedback_count": {
+                "type": "string",
+                "pattern": "^(unknown|\\d+)$"
+              },
+              "top_rated": {
+                "type": "boolean"
+              }
+            }
+          },
+          "policy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "returns",
+              "returns_window",
+              "warranty"
+            ],
+            "properties": {
+              "returns": {
+                "enum": [
+                  "accepted",
+                  "not-accepted",
+                  "unknown"
+                ]
+              },
+              "returns_window": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "warranty": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              }
+            }
+          },
+          "reviews": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "inspected",
+              "rating",
+              "rating_count",
+              "negative_themes"
+            ],
+            "properties": {
+              "inspected": {
+                "type": "boolean"
+              },
+              "rating": {
+                "type": "string",
+                "pattern": "^(unknown|\\d+(?:\\.\\d{1,2})?)$"
+              },
+              "rating_count": {
+                "type": "string",
+                "pattern": "^(unknown|\\d+)$"
+              },
+              "negative_themes": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              }
+            }
+          },
+          "signals": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "quantity_available",
+              "sold_count",
+              "negative_signals",
+              "contradictions"
+            ],
+            "properties": {
+              "quantity_available": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "sold_count": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "negative_signals": {
+                "type": "array",
+                "maxItems": 20,
+                "items": {
+                  "type": "string",
+                  "maxLength": 240
+                }
+              },
+              "contradictions": {
+                "type": "array",
+                "maxItems": 12,
+                "items": {
+                  "type": "string",
+                  "maxLength": 240
+                }
+              }
+            }
+          },
+          "evidence_level": {
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "retrieved_at": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 64
+          },
+          "seen_in_rounds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "type": "string"
+            }
+          },
+          "rank_history": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 24,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

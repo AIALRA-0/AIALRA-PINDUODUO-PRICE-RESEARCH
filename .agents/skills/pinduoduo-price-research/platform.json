@@ -1,0 +1,22 @@
+{
+  "platform_name": "拼多多",
+  "marketplace_hosts": {
+    "pinduoduo.com": "mobile.yangkeduo.com"
+  },
+  "item_hosts": [
+    "mobile.yangkeduo.com"
+  ],
+  "item_id_pattern": "^[0-9]{5,30}$",
+  "id_query_keys": [
+    "goods_id"
+  ],
+  "id_path_patterns": [],
+  "canonical_host": "mobile.yangkeduo.com",
+  "canonical_path_template": "/goods.html",
+  "canonical_query_template": "goods_id={item_id}",
+  "search_url_templates": {
+    "relevance": "https://{host}/search_result.html?search_key={query}",
+    "price-ascending": "https://{host}/search_result.html?search_key={query}",
+    "newest": "https://{host}/search_result.html?search_key={query}"
+  }
+}

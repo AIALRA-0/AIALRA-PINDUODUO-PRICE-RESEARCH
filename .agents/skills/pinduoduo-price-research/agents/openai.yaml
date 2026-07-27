@@ -1,0 +1,7 @@
+interface:
+  display_name: "拼多多价格研究"
+  short_description: "多轮核验拼多多商品当前价格、拼单条件、目标规格、评价、店铺与购买风险"
+  default_prompt: "使用 $pinduoduo-price-research 多轮搜索并核验拼多多当前最低价可行商品"
+
+policy:
+  allow_implicit_invocation: true

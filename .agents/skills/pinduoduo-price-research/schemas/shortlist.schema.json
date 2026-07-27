@@ -1,0 +1,232 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan",
+    "access",
+    "round_coverage",
+    "filter_summary",
+    "shortlist"
+  ],
+  "properties": {
+    "plan": {
+      "type": "object"
+    },
+    "access": {
+      "type": "object"
+    },
+    "round_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rounds_executed",
+        "unique_candidates",
+        "new_unique_by_round",
+        "duplicate_observations",
+        "source_backends",
+        "saturated",
+        "stop_reason",
+        "blocked_reasons"
+      ],
+      "properties": {
+        "rounds_executed": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 5
+        },
+        "unique_candidates": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 160
+        },
+        "new_unique_by_round": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "duplicate_observations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_backends": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "enum": [
+              "aialra-shopping-browser"
+            ]
+          }
+        },
+        "saturated": {
+          "type": "boolean"
+        },
+        "stop_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "blocked_reasons": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "filter_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_observations",
+        "obvious_mismatches_removed",
+        "selected_for_detail"
+      ],
+      "properties": {
+        "input_observations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "obvious_mismatches_removed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selected_for_detail": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        }
+      }
+    },
+    "shortlist": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "platform_item_id",
+          "title",
+          "displayed_price",
+          "currency",
+          "buying_formats",
+          "condition_summary",
+          "seller_name",
+          "shipping_text",
+          "image_url",
+          "url",
+          "source_backends",
+          "seen_in_rounds",
+          "matched_queries",
+          "rank_history",
+          "price_observations",
+          "first_seen_at",
+          "last_seen_at"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "platform_item_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{5,40}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "displayed_price": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "buying_formats": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "enum": [
+                "fixed-price",
+                "group-buy",
+                "member-price",
+                "subscription",
+                "unknown"
+              ]
+            }
+          },
+          "condition_summary": {
+            "type": "string"
+          },
+          "seller_name": {
+            "type": "string"
+          },
+          "shipping_text": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "source_backends": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "enum": [
+                "aialra-shopping-browser"
+              ]
+            }
+          },
+          "seen_in_rounds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "type": "string"
+            }
+          },
+          "matched_queries": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "type": "string"
+            }
+          },
+          "rank_history": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 24,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "price_observations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 24,
+            "items": {
+              "type": "string"
+            }
+          },
+          "first_seen_at": {
+            "type": "string"
+          },
+          "last_seen_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

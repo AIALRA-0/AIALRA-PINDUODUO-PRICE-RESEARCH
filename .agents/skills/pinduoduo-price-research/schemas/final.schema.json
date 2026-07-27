@@ -1,0 +1,277 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "query_snapshot",
+    "recommendation",
+    "offers",
+    "round_coverage",
+    "inspection_coverage",
+    "manual_search_urls",
+    "warnings"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "complete",
+        "partial",
+        "no-result"
+      ]
+    },
+    "query_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_text",
+        "product",
+        "marketplace",
+        "destination_country",
+        "destination_region",
+        "condition",
+        "comparison_currency",
+        "retrieved_at"
+      ],
+      "properties": {
+        "request_text": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "marketplace": {
+          "type": "string"
+        },
+        "destination_country": {
+          "type": "string"
+        },
+        "destination_region": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "comparison_currency": {
+          "type": "string"
+        },
+        "retrieved_at": {
+          "type": "string"
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_type",
+        "winner_id",
+        "summary"
+      ],
+      "properties": {
+        "decision_type": {
+          "enum": [
+            "lowest-complete-total",
+            "lowest-known-pre-tax-total",
+            "no-viable-offer"
+          ]
+        },
+        "winner_id": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      }
+    },
+    "offers": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rank",
+          "offer_id",
+          "title",
+          "seller_name",
+          "url",
+          "image_urls",
+          "search_backends",
+          "detail_backend",
+          "condition",
+          "buying_formats",
+          "currency",
+          "price",
+          "known_total",
+          "cost_completeness",
+          "price_scope",
+          "eligible",
+          "exclusion_reasons",
+          "risk_score",
+          "risk_level",
+          "risk_reasons",
+          "review_summary",
+          "evidence_level",
+          "seen_in_rounds",
+          "rank_history",
+          "retrieved_at"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "offer_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "seller_name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "image_urls": {
+            "type": "array",
+            "maxItems": 6,
+            "items": {
+              "type": "string"
+            }
+          },
+          "search_backends": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "aialra-shopping-browser"
+              ]
+            }
+          },
+          "detail_backend": {
+            "enum": [
+              "aialra-shopping-browser"
+            ]
+          },
+          "condition": {
+            "type": "string"
+          },
+          "buying_formats": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "fixed-price",
+                "group-buy",
+                "member-price",
+                "subscription",
+                "unknown"
+              ]
+            }
+          },
+          "currency": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "known_total": {
+            "type": "string"
+          },
+          "cost_completeness": {
+            "enum": [
+              "complete",
+              "pre-tax-only",
+              "display-only"
+            ]
+          },
+          "price_scope": {
+            "enum": [
+              "public",
+              "coupon",
+              "account-personalized",
+              "group-buy",
+              "member",
+              "subscription",
+              "unknown"
+            ]
+          },
+          "eligible": {
+            "type": "boolean"
+          },
+          "exclusion_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "risk_level": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "risk_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "review_summary": {
+            "type": "string"
+          },
+          "evidence_level": {
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "seen_in_rounds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rank_history": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "retrieved_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "round_coverage": {
+      "type": "object"
+    },
+    "inspection_coverage": {
+      "type": "object"
+    },
+    "manual_search_urls": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
