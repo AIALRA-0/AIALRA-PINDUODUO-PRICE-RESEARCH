@@ -10,8 +10,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_NAME = ROOT.name
-SKILL = ROOT / ".agents" / "skills" / SKILL_NAME
+SKILLS = [path for path in (ROOT / ".agents" / "skills").iterdir() if path.is_dir()]
+if len(SKILLS) != 1:
+    raise RuntimeError(f"Expected one Skill, found {len(SKILLS)}")
+SKILL = SKILLS[0]
+SKILL_NAME = SKILL.name
 sys.path.insert(0, str(SKILL / "scripts"))
 
 from domain_lib import canonical_item_url, official_search_url  # noqa: E402
