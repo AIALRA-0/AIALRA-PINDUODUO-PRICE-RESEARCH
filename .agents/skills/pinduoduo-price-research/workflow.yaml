@@ -31,7 +31,7 @@
               "maximum_rounds": 5,
               "default_detail_limit": 8
             },
-            "instructions": "Preserve the exact product identity and every explicit constraint; create three to five distinct search queries covering the exact model, aliases, specifications and likely accessory confusion; use relevance, price and newest observations when the site exposes them; default to fixed-price; keep precise addresses and account data out of the plan; declare bounded read-only limits"
+            "instructions": "Preserve the exact product identity and every explicit constraint; set identity_phrases to one to five short continuous title phrases covering exact-model spelling variants, and set required_terms to atomic identity checks that must all be present; create three to five distinct search queries covering the exact model, aliases, specifications and likely accessory confusion; use relevance, price and newest observations when the site exposes them; default to fixed-price; keep precise addresses and account data out of the plan; declare bounded read-only limits"
           },
           "side_effect": "none",
           "requires_confirmation": false,

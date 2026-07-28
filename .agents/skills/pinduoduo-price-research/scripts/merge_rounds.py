@@ -17,7 +17,8 @@ from domain_lib import canonical_item_url, normalized_text, parse_money, require
 OBVIOUS_EXCLUSION_RE = re.compile(
     r"\b(?:box only|empty box|manual only|replacement|repair service|rental|"
     r"for parts|parts only|not working|broken|pre[- ]?order|deposit|case only|"
-    r"cable only|adapter only|lens only|mount only|wanted)\b|"
+    r"hard case|carrying case|protective case|lens shade|cable only|adapter only|"
+    r"lens only|mount only|wanted)\b|"
     r"空盒|仅包装|配件专用|维修服务|出租|求购|定金|预售|坏件|拆机件",
     re.IGNORECASE,
 )
@@ -39,6 +40,11 @@ def build_shortlist(payload: dict[str, Any]) -> dict[str, Any]:
     candidates = require_list(payload.get("candidates"), "candidates")
     excluded_terms = {normalized_text(value) for value in product.get("excluded_terms", []) if normalized_text(value)}
     required_terms = {normalized_text(value) for value in product.get("required_terms", []) if normalized_text(value)}
+    identity_phrases = {
+        normalized_text(value)
+        for value in product.get("identity_phrases", [])
+        if normalized_text(value)
+    }
     unique: dict[str, dict[str, Any]] = {}
     new_by_round: list[int] = []
     seen_before: set[str] = set()
@@ -100,7 +106,12 @@ def build_shortlist(payload: dict[str, Any]) -> dict[str, Any]:
         if OBVIOUS_EXCLUSION_RE.search(title) or any(contains_term(title, term) for term in excluded_terms):
             removed += 1
             continue
-        if required_terms and not any(contains_term(title, term) for term in required_terms):
+        if required_terms and not all(contains_term(title, term) for term in required_terms):
+            removed += 1
+            continue
+        if identity_phrases and not any(
+            contains_term(title, phrase) for phrase in identity_phrases
+        ):
             removed += 1
             continue
         selected.append(item)

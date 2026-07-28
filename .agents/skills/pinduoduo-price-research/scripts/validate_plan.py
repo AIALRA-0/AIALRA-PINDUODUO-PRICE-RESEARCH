@@ -42,6 +42,16 @@ def validate(source: dict[str, Any], plan: dict[str, Any]) -> list[str]:
         errors.append("query_variants cannot contain empty queries")
     if len(set(normalized)) != len(normalized):
         errors.append("query_variants must be distinct after normalization")
+    identity_phrases = [
+        normalized_text(value)
+        for value in require_list(product.get("identity_phrases"), "identity_phrases")
+    ]
+    if not 1 <= len(identity_phrases) <= 5:
+        errors.append("identity_phrases must contain one to five phrases")
+    if any(not value for value in identity_phrases):
+        errors.append("identity_phrases cannot contain empty phrases")
+    if len(set(identity_phrases)) != len(identity_phrases):
+        errors.append("identity_phrases must be distinct after normalization")
     required_terms = [normalized_text(value) for value in require_list(product.get("required_terms"), "required_terms")]
     if not required_terms:
         errors.append("at least one product identity term is required")

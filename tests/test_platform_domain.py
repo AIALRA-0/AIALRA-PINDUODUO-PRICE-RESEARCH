@@ -108,6 +108,7 @@ def plan() -> dict:
             "canonical_query": "RTX 5070 Ti 16GB",
             "category": "graphics card",
             "condition": "new",
+            "identity_phrases": ["5070 Ti 16GB", "5070Ti 16G"],
             "required_terms": ["5070 Ti", "16GB"],
             "excluded_terms": ["box only", "cooler only", "wanted"],
         },
@@ -355,6 +356,25 @@ class PlatformDomainTests(unittest.TestCase):
             ["round-1", "round-2", "round-3"],
             shortlist["shortlist"][0]["seen_in_rounds"],
         )
+
+    def test_shortlist_requires_every_product_identity_term(self) -> None:
+        payload = rounds()
+        target_id = payload["candidates"][1]["platform_item_id"]
+        first_required_term = payload["plan"]["product"]["required_terms"][0]
+        for candidate in payload["candidates"]:
+            if candidate["platform_item_id"] == target_id:
+                candidate["title"] = f"{first_required_term} unrelated product"
+        identifiers = {item["platform_item_id"] for item in build_shortlist(payload)["shortlist"]}
+        self.assertNotIn(target_id, identifiers)
+
+    def test_shortlist_rejects_scattered_identity_words(self) -> None:
+        payload = rounds()
+        target_id = payload["candidates"][1]["platform_item_id"]
+        for candidate in payload["candidates"]:
+            if candidate["platform_item_id"] == target_id:
+                candidate["title"] = "RTX 5070 Ti premium computer bundle 16GB"
+        identifiers = {item["platform_item_id"] for item in build_shortlist(payload)["shortlist"]}
+        self.assertNotIn(target_id, identifiers)
 
     def test_ranking_selects_lowest_complete_low_risk_offer(self) -> None:
         shortlist = build_shortlist(rounds())
