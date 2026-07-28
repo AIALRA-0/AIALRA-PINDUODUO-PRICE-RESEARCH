@@ -22,7 +22,7 @@
     ".agents/skills/pinduoduo-price-research/scripts/merge_rounds.py": "7f0fb9337e8253ad6e2290fa2fbd2bb62db5ce7a11ed2c65368a74d233596a9a",
     ".agents/skills/pinduoduo-price-research/scripts/promote.py": "a68003a16738141752db61106c8fafee31b001ae9e9ad8466ebe4747d1faa103",
     ".agents/skills/pinduoduo-price-research/scripts/rank_offers.py": "66c750d03452e6160b647f3ddeb755e44454900bb7bb3ff6f808b2b546152bad",
-    ".agents/skills/pinduoduo-price-research/scripts/runner.py": "267962092de29452dcac917b6676f21fe2c346dd0ae0911086990d2ddeefdf8a",
+    ".agents/skills/pinduoduo-price-research/scripts/runner.py": "afd479afcf6d852201109b2906fa4f0039925f06dcba52cb43b3de954ce7483e",
     ".agents/skills/pinduoduo-price-research/scripts/runtime_lib.py": "26013aba9313d03c7b67a76b61b5234d8e52eafd71f2e9a1a2cb7dc1cbc099b3",
     ".agents/skills/pinduoduo-price-research/scripts/validate_access.py": "ac67cbd7eb734a316c7178f28d61da904feca292fd09ab5e0db73c9521c05c1d",
     ".agents/skills/pinduoduo-price-research/scripts/validate_final.py": "dc022fc432a850ff67e5b3667f6b430e42bf00cbdb7d9ef6df4e42d8f032495e",
@@ -36,12 +36,12 @@
     ".pre-commit-config.yaml": "721f006af8f50751b68c7ac00cad81d44cf57cb7296403916eeb17a760f25643",
     "AGENTS.md": "a29a216f370679ee0105cd3e3e2a7fcdba08a8a0143656bb3740fba5daff8b83",
     "SECURITY.md": "7761de84561b39e58393d717ad228c741d9ffad729be6f0b4b7bf006eefcff80",
-    "VERSION": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67",
+    "VERSION": "80447316529fc62014fbaa047fb67c51ac30e32830cda370405349d8d66d196c",
     "scripts/check_secrets.py": "0c45e9a2eccb054b1a2347a9b3f65f77ef35f4b760831e2ec3a24ccc3385af40",
     "scripts/install_local.py": "e5ab3d37dcb6e1a4eef8bd28b848326fe4477735e3bb5c56c8e7f8775a946814",
     "scripts/validate.py": "bd6ff45c47651e415f25cd26db712f4da73606f4723e2ff8f8f58077d5f29f5e"
   },
   "format_version": 1,
   "skill_name": "pinduoduo-price-research",
-  "skill_version": "0.1.0"
+  "skill_version": "0.1.1"
 }
