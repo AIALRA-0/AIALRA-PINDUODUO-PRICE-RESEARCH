@@ -69,7 +69,12 @@ def atomic_write_json(path: Path, data: Any) -> None:
     payload = json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     file_descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
     try:
-        with os.fdopen(file_descriptor, "w", encoding="utf-8") as handle:
+        with os.fdopen(
+            file_descriptor,
+            "w",
+            encoding="utf-8",
+            newline="\n",
+        ) as handle:
             handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())
@@ -687,7 +692,8 @@ def compute_core_manifest(root: Path, skill_dir: Path) -> dict[str, Any]:
         "skill_name": skill_dir.name,
         "skill_version": (root / "VERSION").read_text(encoding="utf-8").strip(),
         "files": {
-            str(path.relative_to(root)): sha256_file(path) for path in core_files(root, skill_dir)
+            path.relative_to(root).as_posix(): sha256_file(path)
+            for path in core_files(root, skill_dir)
         },
     }
 
