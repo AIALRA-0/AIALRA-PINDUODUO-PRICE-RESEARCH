@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="142" height="28" role="img" aria-label="mode: read only">
+  <title>mode: read only</title>
+  <linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-opacity=".08"/></linearGradient>
+  <clipPath id="r"><rect width="142" height="28" rx="7"/></clipPath>
+  <g clip-path="url(#r)"><rect width="52" height="28" fill="#202938"/><rect x="52" width="90" height="28" fill="#0f766e"/><rect width="142" height="28" fill="url(#s)"/></g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" font-weight="600">
+    <text x="26.0" y="18">mode</text><text x="97.0" y="18">read only</text>
+  </g>
+</svg>
